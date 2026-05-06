@@ -28,5 +28,17 @@ export default defineConfigWithVueTs(
 
   ...pluginOxlint.buildFromOxlintConfigFile('.oxlintrc.json'),
 
-  skipFormatting,
+
+  {
+  rules: {
+    'vue/max-attributes-per-line': [
+      'error',
+      {
+        singleline: 1,
+        multiline: 1,
+      },
+    ],
+  },
+},
+  skipFormatting
 )
