@@ -13,9 +13,11 @@ export interface Product {
 export const useProductsStore = defineStore('products', () => {
   const products = ref<Product[]>([])
 
-  const topProductsBySales = computed(() =>
-    [...products.value].sort((a, b) => b.sales - a.sales).slice(0, 5),
-  )
+  function topProductsBySales(limit = 5) {
+    return [...products.value]
+      .sort((a, b) => b.sales - a.sales)
+      .slice(0, limit)
+  }
 
   async function fetchProducts() {
     const data = await getProducts()
