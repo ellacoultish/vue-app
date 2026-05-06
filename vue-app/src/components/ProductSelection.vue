@@ -1,18 +1,29 @@
-<script setup lang="ts">
-import ProductCard  from './Product/ProductCard.vue';  
-defineProps<{
-  msg: string
-}>()
-</script>
-
 <template>
- <div class="grid grid-flow-col grid-rows-4 gap-4">
-  <ProductCard />
-  <ProductCard />
-  <ProductCard />
-  <ProductCard />
- </div>
+  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <ProductCard
+      v-for="product in topProductsBySales"
+      :key="product.title"
+      :title="product.title"
+      :image="product.imageUrl"
+      :price="product.price"
+      :rating="product.rating"
+      :sales="product.sales"
+    />
+  </div>
 </template>
 
-<style scoped>
-</style>
+<script setup lang="ts">
+import { onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
+import ProductCard from './Product/ProductCard.vue'
+import { useProductsStore } from '@/stores/products'
+
+const productsStore = useProductsStore()
+const { topProductsBySales } = storeToRefs(productsStore)
+
+onMounted(() => {
+  void productsStore.fetchProducts()
+})
+</script>
+
+<style scoped></style>
