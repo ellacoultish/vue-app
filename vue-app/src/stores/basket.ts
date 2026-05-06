@@ -8,6 +8,9 @@ export const useBasketStore = defineStore('basket', () => {
   function getBasket() {
     return basket.value
   }
+  function getBasketCount() {
+    return basket.value.length
+  }
 
   function addToBasket(product: Product) {
     debugger
@@ -29,5 +32,12 @@ export const useBasketStore = defineStore('basket', () => {
     return basket.value.some((p) => p.title === product.title)
   }
 
-  return { getBasket, addToBasket, removeFromBasket, clearBasket, isInBasket }
+  return {
+    getBasket,
+    getBasketCount,
+    addToBasket,
+    removeFromBasket,
+    clearBasket,
+    isInBasket,
+  }
 })

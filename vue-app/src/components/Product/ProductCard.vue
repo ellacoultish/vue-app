@@ -23,11 +23,16 @@
 
         <div class="text-xs text-gray-500">{{ sales }} sales</div>
         <button
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          :disabled="!isInBasket"
+          :class="[
+            'text-white font-bold py-2 px-4 rounded',
+            isInBasket
+              ? 'bg-gray-400 hover:bg-gray-400'
+              : 'bg-blue-500 hover:bg-blue-700',
+          ]"
+          :disabled="isInBasket"
           @click="basketClick()"
         >
-          Add to Cart
+          {{ isInBasket ? 'In Cart' : 'Add to Cart' }}
         </button>
       </div>
     </div>
@@ -38,7 +43,7 @@
 import BaseCard from '../UI/BaseCard.vue'
 
 const emit = defineEmits<{
-  (event: 'basketclick'): void
+  (event: 'basket-click'): void
 }>()
 
 withDefaults(
@@ -60,6 +65,7 @@ withDefaults(
   },
 )
 function basketClick() {
-  emit('basketclick')
+  debugger
+  emit('basket-click')
 }
 </script>

@@ -9,7 +9,7 @@
       :rating="product.rating"
       :sales="product.sales"
       :is-in-basket="basketStore.isInBasket(product)"
-      @basket-click="basketClick(product)"
+      @basket-click="handleBasketClick(product)"
     />
   </div>
 </template>
@@ -28,7 +28,7 @@ onMounted(() => {
   void productsStore.fetchProducts()
 })
 
-function basketClick(product: Product) {
+function handleBasketClick(product: Product) {
   if (!basketStore.isInBasket(product)) {
     basketStore.addToBasket(product)
   } else {
