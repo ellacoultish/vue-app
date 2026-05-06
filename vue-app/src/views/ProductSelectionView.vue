@@ -1,7 +1,9 @@
+<script setup lang="ts">
+import ProductSelection from '../components/ProductSelection.vue'
+</script>
+
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+<ProductSelection/>
 </template>
 
 <style>
