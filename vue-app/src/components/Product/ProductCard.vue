@@ -65,7 +65,6 @@ withDefaults(
   },
 )
 function basketClick() {
-  debugger
   emit('basket-click')
 }
 </script>

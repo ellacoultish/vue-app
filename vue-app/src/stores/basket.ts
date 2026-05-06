@@ -13,7 +13,6 @@ export const useBasketStore = defineStore('basket', () => {
   }
 
   function addToBasket(product: Product) {
-    debugger
     basket.value.push(product)
   }
 
