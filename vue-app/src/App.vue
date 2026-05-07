@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col w-screen h-screen">
     <header>
-      <nav class="w-full flex py-4 bg-gray-200">
+      <nav class="w-full flex py-4 bg-surface-muted">
         <div class="justify-center w-full flex items-center gap-4">
           <RouterLink
             v-for="link in links"

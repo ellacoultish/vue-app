@@ -1,2 +1,22 @@
 @import './base.css';
 @import 'tailwindcss';
+
+@theme {
+  --color-surface: #ffffff;
+  --color-surface-muted: #e5e7eb;
+  --color-surface-disabled: #9ca3af;
+
+  --color-ink: #111827;
+  --color-ink-soft: #374151;
+  --color-ink-muted: #6b7280;
+  --color-ink-subtle: #4b5563;
+
+  --color-line: #e5e7eb;
+  --color-line-soft: #f3f4f6;
+
+  --color-brand: #3b82f6;
+  --color-brand-strong: #1d4ed8;
+
+  --color-danger: #ef4444;
+  --color-danger-strong: #b91c1c;
+}

@@ -1,6 +1,6 @@
 <template>
   <BaseCard>
-    <div class="overflow-hidden bg-white border border-gray-100">
+    <div class="overflow-hidden bg-surface border border-line-soft">
       <img
         class="h-48 w-full object-cover"
         :src="image"
@@ -8,26 +8,26 @@
       />
 
       <div class="p-4 space-y-3">
-        <h2 class="text-lg font-semibold text-gray-900 line-clamp-2">
+        <h2 class="text-lg font-semibold text-ink line-clamp-2">
           {{ title }}
         </h2>
 
-        <div class="flex items-center justify-between text-sm text-gray-600">
+        <div class="flex items-center justify-between text-sm text-ink-subtle">
           <div class="flex items-center gap-1">
-            <span class="font-medium text-gray-900">{{ rating }}</span>
+            <span class="font-medium text-ink">{{ rating }}</span>
             <span>/ 5</span>
           </div>
 
-          <div class="font-semibold text-gray-900">£{{ price }}</div>
+          <div class="font-semibold text-ink">£{{ price }}</div>
         </div>
 
-        <div class="text-xs text-gray-500">{{ sales }} sales</div>
+        <div class="text-xs text-ink-muted">{{ sales }} sales</div>
         <button
           :class="[
             'text-white font-bold py-2 px-4 rounded',
             isInBasket
-              ? 'bg-gray-400 hover:bg-gray-400'
-              : 'bg-blue-500 hover:bg-blue-700',
+              ? 'bg-surface-disabled hover:bg-surface-disabled'
+              : 'bg-brand hover:bg-brand-strong',
           ]"
           :disabled="isInBasket"
           @click="basketClick()"

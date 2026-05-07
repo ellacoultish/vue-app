@@ -3,10 +3,10 @@
     class="relative inline-flex items-center justify-center p-2"
     @click="basketClick"
   >
-    <ShoppingCartIcon class="w-6 h-6 text-gray-800" />
+    <ShoppingCartIcon class="w-6 h-6 text-ink-soft" />
     <span
       v-if="count > 0"
-      class="absolute -top-1 -right-1 min-w-5 h-5 px-1 flex items-center justify-center text-xs font-bold text-white bg-red-500 rounded-full"
+      class="absolute -top-1 -right-1 min-w-5 h-5 px-1 flex items-center justify-center text-xs font-bold text-surface bg-danger rounded-full"
     >
       {{ count }}
     </span>
