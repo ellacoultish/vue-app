@@ -1,5 +1,9 @@
+import storybook from 'eslint-plugin-storybook'
 import { globalIgnores } from 'eslint/config'
-import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
+import {
+  defineConfigWithVueTs,
+  vueTsConfigs,
+} from '@vue/eslint-config-typescript'
 import pluginVue from 'eslint-plugin-vue'
 import pluginVitest from '@vitest/eslint-plugin'
 import pluginOxlint from 'eslint-plugin-oxlint'
@@ -28,17 +32,16 @@ export default defineConfigWithVueTs(
 
   ...pluginOxlint.buildFromOxlintConfigFile('.oxlintrc.json'),
 
-
   {
-  rules: {
-    'vue/max-attributes-per-line': [
-      'error',
-      {
-        singleline: 1,
-        multiline: 1,
-      },
-    ],
+    rules: {
+      'vue/max-attributes-per-line': [
+        'error',
+        {
+          singleline: 1,
+          multiline: 1,
+        },
+      ],
+    },
   },
-},
-  skipFormatting
+  skipFormatting,
 )
