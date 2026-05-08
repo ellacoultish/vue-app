@@ -40,7 +40,7 @@ import CartPreview from './CartPreview.vue'
 import BaseCard from '../UI/BaseCard.vue'
 import BaseButton from '../UI/BaseButton.vue'
 
-const props = defineProps<{
+defineProps<{
   items: Product[]
 }>()
 
