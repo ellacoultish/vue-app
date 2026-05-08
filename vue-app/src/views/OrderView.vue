@@ -78,6 +78,33 @@
           <div class="sm:col-span-2">
             <label
               class="block text-sm font-medium text-ink"
+              for="delivery-type"
+            >
+              Delivery type
+            </label>
+            <select
+              id="delivery-type"
+              v-model="orderFormStore.form.deliveryType"
+              class="mt-1 w-full rounded border border-line bg-surface px-3 py-2 text-ink outline-none focus:border-brand"
+              name="deliveryType"
+              required
+              @change="orderFormStore.orderSubmitted = false"
+            >
+              <option
+                disabled
+                value=""
+              >
+                Select a delivery type
+              </option>
+              <option value="standard">Standard delivery</option>
+              <option value="express">Express delivery</option>
+              <option value="collection">Click and collect</option>
+            </select>
+          </div>
+
+          <div class="sm:col-span-2">
+            <label
+              class="block text-sm font-medium text-ink"
               for="notes"
             >
               Delivery notes
@@ -91,6 +118,42 @@
               @input="orderFormStore.orderSubmitted = false"
             />
           </div>
+        </div>
+
+        <div>
+          <label
+            class="flex items-start gap-3 rounded border bg-line-soft px-4 py-3 text-sm text-ink"
+            :class="
+              showTermsError ? 'border-danger' : 'border-line-soft'
+            "
+            for="accepted-terms"
+          >
+            <input
+              id="accepted-terms"
+              v-model="orderFormStore.form.acceptedTerms"
+              class="mt-1 h-4 w-4 rounded border-line text-brand focus:ring-brand"
+              name="acceptedTerms"
+              required
+              type="checkbox"
+              :aria-invalid="showTermsError ? 'true' : 'false'"
+              :aria-describedby="
+                showTermsError ? 'accepted-terms-error' : undefined
+              "
+              @change="handleTermsChange"
+              @invalid="handleTermsInvalid"
+            />
+            <span>
+              I accept the terms and conditions.
+            </span>
+          </label>
+          <p
+            v-if="showTermsError"
+            id="accepted-terms-error"
+            class="mt-1 text-sm text-danger"
+          >
+            You need to accept the terms and conditions before placing your
+            order.
+          </p>
         </div>
 
         <div class="flex">
@@ -126,7 +189,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import {
   createPatternValidator,
@@ -145,6 +208,10 @@ const orderFormStore = useOrderFormStore()
 const router = useRouter()
 const { isFormValid, setFieldValidity } = useFormValidation(orderFormFields)
 const basketItems = computed(() => basketStore.getBasket())
+const hasCheckedTerms = ref(false)
+const showTermsError = computed(
+  () => hasCheckedTerms.value && !orderFormStore.form.acceptedTerms,
+)
 const validatePhone = createPhoneValidator()
 const validatePostcode = createPatternValidator(
   /^[A-Za-z0-9][A-Za-z0-9 -]{2,10}$/,
@@ -156,9 +223,19 @@ function handleValidityChange(name: string, isValid: boolean) {
   orderFormStore.orderSubmitted = false
 }
 
+function handleTermsChange() {
+  hasCheckedTerms.value = true
+  orderFormStore.orderSubmitted = false
+}
+
+function handleTermsInvalid() {
+  hasCheckedTerms.value = true
+}
+
 function submitOrder(event: SubmitEvent) {
   event.preventDefault()
   orderFormStore.orderSubmitted = false
+  hasCheckedTerms.value = true
 
   const form = event.currentTarget as HTMLFormElement
 

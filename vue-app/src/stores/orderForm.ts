@@ -12,19 +12,38 @@ export const orderFormFields = [
 
 export type OrderFormField = (typeof orderFormFields)[number]
 
+export type DeliveryType = 'standard' | 'express' | 'collection'
+
+export interface OrderForm {
+  fullName: string
+  email: string
+  phone: string
+  address: string
+  city: string
+  postcode: string
+  deliveryType: DeliveryType
+  notes: string
+  acceptedTerms: boolean
+}
+
 export const useOrderFormStore = defineStore('orderForm', () => {
-  const form = reactive<Record<OrderFormField | 'notes', string>>({
+  const form = reactive<OrderForm>({
     fullName: '',
     email: '',
     phone: '',
     address: '',
     city: '',
     postcode: '',
+    deliveryType: 'standard',
     notes: '',
+    acceptedTerms: false,
   })
   const orderSubmitted = ref(false)
 
-  function setField(name: OrderFormField | 'notes', value: string) {
+  function setField<FieldName extends keyof OrderForm>(
+    name: FieldName,
+    value: OrderForm[FieldName],
+  ) {
     form[name] = value
     orderSubmitted.value = false
   }

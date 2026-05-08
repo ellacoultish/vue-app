@@ -21,6 +21,10 @@
           <p class="mt-1 text-sm text-ink-muted">
             {{ deliveryAddress }}
           </p>
+          <p class="mt-3 text-sm font-medium text-ink">Delivery type</p>
+          <p class="mt-1 text-sm text-ink-muted">
+            {{ deliveryTypeLabel }}
+          </p>
         </div>
 
         <div
@@ -38,6 +42,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
+import type { DeliveryType } from '@/stores/orderForm'
 import { useOrderFormStore } from '@/stores/orderForm'
 import BaseButton from '../components/UI/BaseButton.vue'
 import BaseCard from '../components/UI/BaseCard.vue'
@@ -55,5 +60,15 @@ const deliveryAddress = computed(() =>
   ]
     .filter(Boolean)
     .join(', '),
+)
+
+const deliveryTypeLabels: Record<DeliveryType, string> = {
+  standard: 'Standard delivery',
+  express: 'Express delivery',
+  collection: 'Click and collect',
+}
+
+const deliveryTypeLabel = computed(() =>
+  deliveryTypeLabels[orderFormStore.form.deliveryType],
 )
 </script>
