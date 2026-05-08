@@ -1,23 +1,21 @@
 <template>
-  <div class="flex flex-col w-screen h-screen">
-    <header>
-      <nav class="w-full flex py-4 bg-surface-muted">
-        <div class="justify-center w-full flex items-center gap-4">
-          <RouterLink
-            v-for="link in links"
-            :key="link.to"
-            :to="link.to"
-          >
-            {{ link.label }}
-          </RouterLink>
-        </div>
+  <div class="min-h-screen w-screen bg-line-soft">
+    <header
+      class="sticky top-0 z-10 border-b border-line bg-surface/95 backdrop-blur"
+    >
+      <nav
+        class="mx-auto flex w-full max-w-7xl items-center gap-4 px-4 py-3 sm:px-6"
+        aria-label="Main navigation"
+      >
+        <AppLogo />
+        <MainNavigation />
 
         <div
-          class="relative ml-auto mr-4"
+          class="relative shrink-0"
           @click.stop
         >
           <ShoppingCartButton
-            class="cursor-pointer"
+            class="cursor-pointer rounded-full border border-line bg-surface shadow-sm transition hover:border-brand hover:text-brand"
             :count="basketStore.getBasketCount()"
             @basket-click="toggleBasket"
           />
@@ -37,8 +35,10 @@
 </template>
 
 <script setup lang="ts">
-import { RouterLink, RouterView, useRouter } from 'vue-router'
+import { RouterView, useRouter } from 'vue-router'
 import { computed, ref } from 'vue'
+import AppLogo from './components/Layout/AppLogo.vue'
+import MainNavigation from './components/Layout/MainNavigation.vue'
 import BasketPopout from './components/Product/BasketPopout.vue'
 import ShoppingCartButton from './components/Product/ShoppingCartButton.vue'
 import { useBasketStore } from './stores/basket'
@@ -47,8 +47,6 @@ const basketStore = useBasketStore()
 const router = useRouter()
 const isBasketOpen = ref(false)
 const basketItems = computed(() => basketStore.getBasket())
-
-const links = [{ to: '/', label: 'Home' }]
 
 function toggleBasket() {
   isBasketOpen.value = !isBasketOpen.value
