@@ -4,9 +4,6 @@
   >
     <div>
       <h2 class="text-xl font-bold text-ink">Featured products</h2>
-      <p class="mt-1 text-sm text-ink-muted">
-        Bestselling mocked stock, sorted by recent sales.
-      </p>
     </div>
 
     <div class="flex flex-wrap gap-2">
