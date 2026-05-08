@@ -26,6 +26,7 @@
             :items="basketItems"
             @close="isBasketOpen = false"
             @remove-item="basketStore.removeFromBasket"
+            @purchase="goToOrder"
           />
         </div>
       </nav>
@@ -36,22 +37,25 @@
 </template>
 
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView, useRouter } from 'vue-router'
 import { computed, ref } from 'vue'
 import BasketPopout from './components/Product/BasketPopout.vue'
 import ShoppingCartButton from './components/Product/ShoppingCartButton.vue'
 import { useBasketStore } from './stores/basket'
 
 const basketStore = useBasketStore()
+const router = useRouter()
 const isBasketOpen = ref(false)
 const basketItems = computed(() => basketStore.getBasket())
 
-const links = [
-  { to: '/', label: 'Home' },
-  { to: '/order', label: 'Order' },
-]
+const links = [{ to: '/', label: 'Home' }]
 
 function toggleBasket() {
   isBasketOpen.value = !isBasketOpen.value
+}
+
+function goToOrder() {
+  isBasketOpen.value = false
+  router.push('/order')
 }
 </script>
