@@ -95,12 +95,9 @@
       <div
         class="flex flex-col gap-3 border-t border-line-soft pt-5 sm:flex-row sm:items-center"
       >
-        <button
-          class="rounded bg-ink px-5 py-2 text-sm font-semibold text-surface hover:bg-ink-soft"
-          type="submit"
-        >
+        <BaseButton type="submit">
           Place order
-        </button>
+        </BaseButton>
 
         <p
           v-if="orderFormStore.orderSubmitted"
@@ -120,6 +117,7 @@ import {
   useFormValidation,
 } from '@/composables/useFormValidation'
 import { orderFormFields, useOrderFormStore } from '@/stores/orderForm'
+import BaseButton from '../components/UI/BaseButton.vue'
 import FormInput from '../components/UI/FormInput.vue'
 
 const orderFormStore = useOrderFormStore()

@@ -22,18 +22,13 @@
         </div>
 
         <div class="text-xs text-ink-muted">{{ sales }} sales</div>
-        <button
-          :class="[
-            'text-white font-bold py-2 px-4 rounded',
-            isInBasket
-              ? 'bg-surface-disabled hover:bg-surface-disabled'
-              : 'bg-brand hover:bg-brand-strong',
-          ]"
+        <BaseButton
           :disabled="isInBasket"
+          variant="brand"
           @click="basketClick()"
         >
           {{ isInBasket ? 'In Cart' : 'Add to Cart' }}
-        </button>
+        </BaseButton>
       </div>
     </div>
   </BaseCard>
@@ -41,6 +36,7 @@
 
 <script setup lang="ts">
 import BaseCard from '../UI/BaseCard.vue'
+import BaseButton from '../UI/BaseButton.vue'
 
 const emit = defineEmits<{
   (event: 'basket-click'): void

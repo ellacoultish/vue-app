@@ -6,13 +6,14 @@
       class="flex items-center justify-between border-b border-line-soft px-4 py-3"
     >
       <h2 class="text-sm font-semibold text-ink">Basket</h2>
-      <button
-        class="text-sm font-medium text-ink-muted hover:text-ink"
+      <BaseButton
+        size="sm"
         type="button"
+        variant="ghost"
         @click="emit('close')"
       >
         Close
-      </button>
+      </BaseButton>
     </div>
 
     <div
@@ -45,13 +46,14 @@
               £{{ item.price }}
             </p>
           </div>
-          <button
-            class="text-xs font-semibold text-danger hover:text-danger-strong"
+          <BaseButton
+            size="sm"
             type="button"
+            variant="danger"
             @click="emit('remove-item', item)"
           >
             Remove
-          </button>
+          </BaseButton>
         </li>
       </ul>
 
@@ -60,13 +62,13 @@
           <span class="text-ink-muted">Total</span>
           <span class="font-semibold text-ink">£{{ totalPrice }}</span>
         </div>
-        <button
-          class="w-full rounded bg-ink px-4 py-2 text-sm font-semibold text-surface hover:bg-ink-soft"
+        <BaseButton
+          class="w-full"
           type="button"
           @click="emit('purchase')"
         >
           Purchase
-        </button>
+        </BaseButton>
       </div>
     </div>
   </div>
@@ -75,6 +77,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { Product } from '@/stores/products'
+import BaseButton from '../UI/BaseButton.vue'
 
 const props = defineProps<{
   items: Product[]
