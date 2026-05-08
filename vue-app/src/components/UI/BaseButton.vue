@@ -25,7 +25,7 @@ withDefaults(
 )
 
 const baseClass =
-  'rounded font-semibold outline-none disabled:cursor-not-allowed disabled:bg-surface-disabled disabled:text-surface'
+  'rounded font-semibold outline-none cursor-pointer disabled:cursor-default disabled:bg-surface-disabled disabled:text-surface'
 
 const sizeClasses = {
   sm: 'px-2 py-1 text-xs',
