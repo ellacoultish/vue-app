@@ -12,24 +12,29 @@ export interface Product {
 
 export const useProductsStore = defineStore('products', () => {
   const products = ref<Product[]>([])
+  const isLoading = ref(false)
 
   function topProductsBySales(limit = 5) {
-    return [...products.value]
-      .sort((a, b) => b.sales - a.sales)
-      .slice(0, limit)
+    return [...products.value].sort((a, b) => b.sales - a.sales).slice(0, limit)
   }
 
   async function fetchProducts() {
-    const data = await getProducts()
+    isLoading.value = true
 
-    products.value = data.map((product) => ({
-      title: product.title,
-      price: product.price,
-      rating: product.rating ?? 0,
-      sales: product.sales,
-      imageUrl: product.imageUrl ?? '',
-    }))
+    try {
+      const data = await getProducts()
+
+      products.value = data.map((product) => ({
+        title: product.title,
+        price: product.price,
+        rating: product.rating ?? 0,
+        sales: product.sales,
+        imageUrl: product.imageUrl ?? '',
+      }))
+    } finally {
+      isLoading.value = false
+    }
   }
 
-  return { products, topProductsBySales, fetchProducts }
+  return { products, isLoading, topProductsBySales, fetchProducts }
 })

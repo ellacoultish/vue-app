@@ -14,6 +14,7 @@
       <ProductGrid
         :basket-items="basketItems"
         :products="featuredProducts"
+        :is-loading="isLoading"
         @basket-click="handleBasketClick"
       />
     </section>
@@ -36,6 +37,7 @@ const categories = ['All', 'Home', 'Desk', 'Travel', 'Wellness']
 const featuredProducts = computed(() => productsStore.topProductsBySales(8))
 const basketItems = computed(() => basketStore.getBasket())
 const totalProducts = computed(() => productsStore.products.length)
+const isLoading = computed(() => productsStore.isLoading)
 const averageRating = computed(() => {
   if (productsStore.products.length === 0) {
     return '0.0'

@@ -131,7 +131,8 @@ const mockedProducts: Product[] = [
   },
 ]
 
-const delay = (duration = 350) => new Promise((resolve) => window.setTimeout(resolve, duration))
+const delay = (duration = 500) =>
+  new Promise((resolve) => window.setTimeout(resolve, duration))
 
 export async function getProducts() {
   await delay()
