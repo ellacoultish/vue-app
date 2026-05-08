@@ -26,3 +26,30 @@ export const Primary: Story = {
     type: 'button',
   },
 }
+export const Brand: Story = {
+  ...Primary,
+  args: {
+    variant: 'brand',
+    size: 'md',
+    disabled: false,
+    type: 'button',
+  },
+}
+export const Ghost: Story = {
+  ...Primary,
+  args: {
+    variant: 'ghost',
+    size: 'md',
+    disabled: false,
+    type: 'button',
+  },
+}
+export const Danger: Story = {
+  ...Primary,
+  args: {
+    variant: 'danger',
+    size: 'md',
+    disabled: false,
+    type: 'button',
+  },
+}
