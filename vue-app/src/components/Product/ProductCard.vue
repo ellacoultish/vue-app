@@ -1,6 +1,6 @@
 <template>
-  <BaseCard>
-    <div class="overflow-hidden bg-surface border border-line-soft">
+  <BaseCard animated>
+    <div>
       <img
         class="h-48 w-full object-cover"
         :src="image"
