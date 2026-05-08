@@ -93,22 +93,14 @@
           </div>
         </div>
 
-        <div
-          class="flex flex-col gap-3 border-t border-line-soft pt-5 sm:flex-row sm:items-center"
-        >
+        <div class="flex">
           <BaseButton
+            class="ml-auto mr-3"
             type="submit"
             :disabled="basketItems.length === 0"
           >
             Place order
           </BaseButton>
-
-          <p
-            v-if="orderFormStore.orderSubmitted"
-            class="text-sm font-medium text-brand-strong"
-          >
-            Order details received.
-          </p>
         </div>
       </form>
 
@@ -135,6 +127,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 import {
   createPatternValidator,
   createPhoneValidator,
@@ -149,6 +142,7 @@ import FormInput from '../components/UI/FormInput.vue'
 
 const basketStore = useBasketStore()
 const orderFormStore = useOrderFormStore()
+const router = useRouter()
 const { isFormValid, setFieldValidity } = useFormValidation(orderFormFields)
 const basketItems = computed(() => basketStore.getBasket())
 const validatePhone = createPhoneValidator()
@@ -173,5 +167,7 @@ function submitOrder(event: SubmitEvent) {
   }
 
   orderFormStore.submitOrder()
+  basketStore.clearBasket()
+  router.push('/confirmation')
 }
 </script>
